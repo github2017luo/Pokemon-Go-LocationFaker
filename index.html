@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 52.6515991, lng: 4.7726038},
+          zoom: 16
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+	   		console.log( 'Lat: ' + event.latLng.lat() + ' and Longitude is: ' + event.latLng.lng() );
+	   		var lat = event.latLng.lat();
+	   		var lng = event.latLng.lng();
+	   		PostPokemonLocation(lat, lng);
+	  	});
+      }
+    </script>
+    <script>
+      var PostPokemonLocation = function(lat, lng) {
+    
+        $.ajax({
+          type: 'get',
+          url: 'http://127.0.0.1/generateXML?lat='+lat+'&long='+lng,
+          success: function (data, status, jqXHR) {
+            console.log(data)
+
+          },
+          error: function(data, status, jqXHR) {
+            console.log(data);
+
+          }
+          
+        });
+      }
+    
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> <!-- change YOUR_API_KEY to your generated key -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </body>
+</html>
