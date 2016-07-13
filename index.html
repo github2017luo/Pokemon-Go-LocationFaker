@@ -21,8 +21,8 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 52.6515991, lng: 4.7726038},
-          zoom: 16
+          center: {lat: 52.234528294213646, lng: 5.328369140625},
+          zoom: 7
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
@@ -38,7 +38,7 @@
     
         $.ajax({
           type: 'get',
-          url: 'http://127.0.0.1/generateXML?lat='+lat+'&long='+lng,
+          url: 'http://127.0.0.1/generateXML?lat='+lat+'&lng='+lng,
           success: function (data, status, jqXHR) {
             console.log(data)
 
